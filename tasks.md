@@ -40,7 +40,9 @@ Do not combine unrelated work into a single task.
 - [x] ENGINEERING.md
 - [x] ARCHITECTURE.md
 - [x] DATABASE.md
-- [ ] TASKS.md
+- [x] TASKS.md
+- [x] SPRINTS.md
+- [x] CONTRIBUTING.md
 
 ---
 
