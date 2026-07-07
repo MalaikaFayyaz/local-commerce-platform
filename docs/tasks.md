@@ -55,6 +55,7 @@ Do not combine unrelated work into a single task.
 - [x] Configure Tailwind CSS
 - [x] Configure ESLint
 - [x] Configure Prettier
+- [x] Configure Aliases
 - [ ] Create folder structure
 - [ ] Configure environment variables
 
