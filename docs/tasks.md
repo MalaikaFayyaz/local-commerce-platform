@@ -52,8 +52,8 @@ Do not combine unrelated work into a single task.
 
 - [x] Create React application
 - [x] Configure TypeScript
-- [ ] Configure Tailwind CSS
-- [ ] Configure ESLint
+- [X] Configure Tailwind CSS
+- [X] Configure ESLint
 - [ ] Configure Prettier
 - [ ] Create folder structure
 - [ ] Configure environment variables
