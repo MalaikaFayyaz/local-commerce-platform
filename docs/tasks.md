@@ -50,8 +50,8 @@ Do not combine unrelated work into a single task.
 
 ## Development Environment
 
-- [ ] Create React application
-- [ ] Configure TypeScript
+- [x] Create React application
+- [x] Configure TypeScript
 - [ ] Configure Tailwind CSS
 - [ ] Configure ESLint
 - [ ] Configure Prettier
