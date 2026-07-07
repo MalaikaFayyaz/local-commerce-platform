@@ -57,7 +57,7 @@ Do not combine unrelated work into a single task.
 - [x] Configure Prettier
 - [x] Configure Aliases
 - [x] Create folder structure
-- [ ] Configure environment variables
+- [x] Configure environment variables
 
 ## Backend
 
