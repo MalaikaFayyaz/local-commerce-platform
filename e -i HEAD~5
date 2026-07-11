@@ -1,0 +1,17 @@
+[33m96dc56f[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m initial schema for 1st migration
+[33mc320abf[m database configration changed(small changes) keeping the design intact, new file created with the chnages
+[33m063016f[m migration for new schema intialized
+[33m2fca132[m supbase local init
+[33m2a844cc[m task update for Create database schema
+[33m3be0b12[m task update for env var configure
+[33m32702c0[m env var configured
+[33me26ba50[m task update for base folder structure created
+[33ma024920[m tasks update for alias configuration
+[33md303cb2[m aliases configured and base url deprecated error surpressed
+[33mfe68760[m task update for prettier
+[33m36fa414[m Prettier configured and tested
+[33mb78a2fc[m tasks update for configuration of tailwind and oslint
+[33m942350c[m Tailwind CSS configured and tested
+[33mcdfee3c[m tasks update for configuring vite app and typescript in tasks.md
+[33m34fe544[m All .mds separated in docs folder
+[33mfd54cfe[m Initialize React frontend with Vite and TypeScript
