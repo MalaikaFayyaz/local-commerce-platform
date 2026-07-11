@@ -61,8 +61,7 @@ Do not combine unrelated work into a single task.
 
 ## Backend
 
-- [ ] Create Supabase project
-- [ ] Create database schema
+- [x] Create database schema
 - [ ] Configure Row Level Security
 - [ ] Seed sample bakery data
 
