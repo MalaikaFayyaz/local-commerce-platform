@@ -28,6 +28,6 @@ create policy "Public can read available products"
 on products
 for select
 using (
-    available = true
+    available
     and archived_at is null
 );
