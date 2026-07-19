@@ -67,6 +67,11 @@ Do not combine unrelated work into a single task.
 
 # Milestone 3 — Application Shell
 
+## Architecture
+
+- [x] Configure React Router
+- [x] Create App Layout
+
 ## Layout
 
 - [ ] Navigation Bar
