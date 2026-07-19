@@ -64,7 +64,7 @@ Do not combine unrelated work into a single task.
 - [x] Create supabase project
 - [x] Create database schema
 - [x] Configure Row Level Security
-- [ ] Configure database triggers
+- [x] Configure database triggers
 - [ ] Seed sample bakery data
 
 ---
