@@ -65,7 +65,7 @@ Do not combine unrelated work into a single task.
 - [x] Create database schema
 - [x] Configure Row Level Security
 - [x] Configure database triggers
-- [ ] Seed sample bakery data
+- [x] Seed sample bakery data
 
 ---
 
