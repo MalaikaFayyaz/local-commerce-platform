@@ -304,3 +304,14 @@ Before implementing any feature:
 3. Understand existing architecture
 4. Reuse before creating new components
 5. Keep the codebase clean
+
+# Feature Development Workflow
+
+Definition of Done
+
+□ Feature implemented
+□ Project builds successfully
+□ No unrelated files modified
+□ Scope matches the task exactly
+□ No Git operations performed
+□ Awaiting review
