@@ -73,6 +73,8 @@ Do not combine unrelated work into a single task.
 
 ## Layout
 
+- [x] Create React Layout
+- [x] Create App Layout
 - [ ] Navigation Bar
 - [ ] Footer
 - [ ] Responsive Layout
