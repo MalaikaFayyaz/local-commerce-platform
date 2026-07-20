@@ -1,8 +1,10 @@
+import { NavLink } from 'react-router-dom'
+
 const navItems = [
-  { label: 'Home', href: '#' },
-  { label: 'Menu', href: '#' },
-  { label: 'About', href: '#' },
-  { label: 'Contact', href: '#' },
+  { label: 'Home', path: '/' },
+  { label: 'Menu', path: '/menu' },
+  { label: 'About', path: '#' },
+  { label: 'Contact', path: '#' },
 ]
 
 function Navbar() {
@@ -10,9 +12,9 @@ function Navbar() {
     <header className="sticky top-0 z-20 border-b border-slate-200 bg-white">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-5 sm:px-6 lg:px-8">
         {/* Logo */}
-        <a href="#" className="flex-shrink-0 text-2xl font-bold tracking-tight text-slate-900">
+        <NavLink to="/" className="flex-shrink-0 text-2xl font-bold tracking-tight text-slate-900">
           Grandir
-        </a>
+        </NavLink>
 
         {/* Navigation Links */}
         <nav
@@ -20,23 +22,27 @@ function Navbar() {
           className="hidden flex-1 items-center justify-center gap-8 md:flex"
         >
           {navItems.map((item) => (
-            <a
+            <NavLink
               key={item.label}
-              href={item.href}
-              className="text-sm font-medium text-slate-600 transition-colors duration-150 hover:text-slate-900"
+              to={item.path}
+              className={({ isActive }) =>
+                `text-sm font-medium transition-colors duration-150 ${
+                  isActive ? 'text-slate-900' : 'text-slate-600 hover:text-slate-900'
+                }`
+              }
             >
               {item.label}
-            </a>
+            </NavLink>
           ))}
         </nav>
 
         {/* CTA Button */}
-        <a
-          href="#"
+        <NavLink
+          to="/cart"
           className="inline-flex items-center rounded-lg bg-amber-600 px-6 py-2.5 text-sm font-semibold text-white transition-colors duration-150 hover:bg-amber-700"
         >
           Order Now
-        </a>
+        </NavLink>
       </div>
     </header>
   )
