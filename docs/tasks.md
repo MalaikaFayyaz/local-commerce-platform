@@ -77,7 +77,7 @@ Do not combine unrelated work into a single task.
 - [x] Create App Layout
 - [x] Navigation Bar
 - [x] Footer
-- [ ] Responsive Layout
+- [x] Responsive Layout
 - [ ] Theme Configuration
 
 ## Home Page
