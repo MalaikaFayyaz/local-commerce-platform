@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom'
+import Footer from '../components/layout/Footer'
 import Navbar from '../components/layout/Navbar'
 
 function AppLayout() {
@@ -12,11 +13,9 @@ function AppLayout() {
         </div>
       </main>
 
-      <footer className="border-t border-slate-200 bg-white/70">Footer Placeholder</footer>
+      <Footer />
     </div>
   )
 }
 
 export default AppLayout
-
-
