@@ -10,8 +10,8 @@ const quickLinks = [
 function Footer() {
   return (
     <footer className="border-t border-slate-200 bg-white">
-      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-10 sm:px-6 lg:px-8 lg:py-12">
-        <div className="grid gap-8 md:grid-cols-[1.2fr_0.8fr_0.9fr]">
+      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
+        <div className="grid gap-8 text-left sm:text-left md:grid-cols-[1.1fr_0.7fr_0.9fr]">
           <section aria-labelledby="footer-brand">
             <h2 id="footer-brand" className="text-lg font-semibold tracking-tight text-slate-900">
               Grandir
@@ -49,7 +49,10 @@ function Footer() {
               Contact
             </h3>
             <div className="mt-4 space-y-2 text-sm text-slate-600">
-              <a href="mailto:hello@grandir.app" className="block transition hover:text-slate-900">
+              <a
+                href="mailto:hello@grandir.app"
+                className="block break-all transition hover:text-slate-900"
+              >
                 hello@grandir.app
               </a>
               <a href="tel:+92XXXXXXXXXX" className="block transition hover:text-slate-900">
