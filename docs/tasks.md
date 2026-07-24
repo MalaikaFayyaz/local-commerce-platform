@@ -85,8 +85,8 @@ Do not combine unrelated work into a single task.
 - [x] Hero Section
 - [x] Featured Products
 - [x] Categories Section
-- [S] Product Grid
-- [ ] About Section
+- [x] Product Grid
+- [x] About Section
 - [ ] Contact Section
 
 ---
