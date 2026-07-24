@@ -83,7 +83,7 @@ Do not combine unrelated work into a single task.
 ## Home Page
 
 - [x] Hero Section
-- [ ] Featured Products
+- [x] Featured Products
 - [ ] Categories Section
 - [ ] Product Grid
 - [ ] About Section
