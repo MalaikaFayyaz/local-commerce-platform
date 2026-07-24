@@ -1,17 +1,19 @@
 import { useEffect, useRef, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const navItems = [
-  { label: 'Home', path: '/', sectionId: 'home' },
+  { label: 'Home', path: '/' },
   { label: 'Menu', path: '/menu' },
-  { label: 'About', path: '#about', sectionId: 'about' },
-  { label: 'Contact', path: '#contact', sectionId: 'contact' },
+  { label: 'About', path: '/#about' },
+  { label: 'Contact', path: '/#contact' },
 ]
 
 function Navbar() {
   const [activeSection, setActiveSection] = useState('home')
   const [isVisible, setIsVisible] = useState(true)
   const lastScrollYRef = useRef(0)
+  const location = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,8 +47,7 @@ function Navbar() {
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
 
         if (visibleEntry) {
-          const id = visibleEntry.target.id
-          setActiveSection(id)
+          setActiveSection(visibleEntry.target.id)
         }
       },
       {
@@ -63,30 +64,38 @@ function Navbar() {
     }
   }, [])
 
-  const scrollToSection = (sectionId: string) => {
-    if (typeof window === 'undefined') {
+  const handleSectionNav = (targetPath: string) => {
+    if (location.pathname === '/' && targetPath === '/') {
+      window.history.pushState({}, '', '/')
+      window.scrollTo({ top: 0, behavior: 'smooth' })
       return
     }
 
-    const target = document.getElementById(sectionId)
-    if (!target) {
+    const hash = targetPath.includes('#') ? targetPath.split('#')[1] : ''
+
+    if (location.pathname === '/') {
+      navigate(targetPath, { replace: false })
       return
     }
 
-    const targetTop = target.getBoundingClientRect().top + window.scrollY - 96
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-    if (Math.abs(targetTop - window.scrollY) < 2) {
-      return
-    }
-
-    window.scrollTo({ top: targetTop, behavior: prefersReducedMotion ? 'auto' : 'smooth' })
+    navigate(`/${hash ? `#${hash}` : ''}`.replace(/#$/, ''))
   }
 
   const getLinkClasses = (isActive: boolean) =>
-    `rounded-full px-2 py-1 text-sm font-medium transition-colors duration-150 ${
-      isActive ? 'bg-slate-100 text-slate-900' : 'text-slate-600 hover:text-slate-900'
+    `border-b-2 border-transparent pb-1 text-sm font-medium transition-colors duration-150 ${
+      isActive ? 'border-amber-600 text-slate-900' : 'text-slate-600 hover:text-slate-900'
     }`
+
+  const isHomeRoute = location.pathname === '/'
+  const activeLabel = isHomeRoute
+    ? activeSection === 'about'
+      ? 'About'
+      : activeSection === 'contact'
+        ? 'Contact'
+        : 'Home'
+    : location.pathname === '/menu'
+      ? 'Menu'
+      : null
 
   return (
     <header
@@ -95,53 +104,44 @@ function Navbar() {
       }`}
     >
       <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-y-3 px-4 py-4 sm:flex-nowrap sm:px-6 lg:px-8">
-        <NavLink
+        <Link
           to="/"
           className="order-1 flex-shrink-0 text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl"
         >
           Grandir
-        </NavLink>
+        </Link>
 
-        <NavLink
+        <Link
           to="/cart"
           className="order-2 flex-shrink-0 rounded-lg bg-amber-600 px-4 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:bg-amber-700 sm:order-3 sm:px-5 sm:py-2.5"
         >
           Order Now
-        </NavLink>
+        </Link>
 
         <nav
           aria-label="Primary navigation"
           className="order-3 flex w-full basis-full flex-wrap items-center justify-center gap-4 sm:order-2 sm:w-auto sm:basis-auto sm:flex-1 sm:gap-6"
         >
           {navItems.map((item) => {
-            if (item.sectionId) {
-              const isActive = activeSection === item.sectionId
-
-              return (
-                <a
-                  key={item.label}
-                  href={item.path}
-                  onClick={(event) => {
-                    event.preventDefault()
-                    if (item.sectionId) {
-                      scrollToSection(item.sectionId)
-                    }
-                  }}
-                  className={getLinkClasses(isActive)}
-                >
-                  {item.label}
-                </a>
-              )
-            }
+            const isActive =
+              (item.label === 'Home' && activeLabel === 'Home') ||
+              (item.label === 'Menu' && activeLabel === 'Menu') ||
+              (item.label === 'About' && activeLabel === 'About') ||
+              (item.label === 'Contact' && activeLabel === 'Contact')
 
             return (
-              <NavLink
+              <Link
                 key={item.label}
                 to={item.path}
-                className={({ isActive }) => getLinkClasses(isActive)}
+                onClick={(event) => {
+                  event.preventDefault()
+                  handleSectionNav(item.path)
+                }}
+                className={getLinkClasses(isActive)}
+                aria-current={isActive ? 'page' : undefined}
               >
                 {item.label}
-              </NavLink>
+              </Link>
             )
           })}
         </nav>
