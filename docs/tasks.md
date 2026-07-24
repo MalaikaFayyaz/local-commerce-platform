@@ -78,7 +78,7 @@ Do not combine unrelated work into a single task.
 - [x] Navigation Bar
 - [x] Footer
 - [x] Responsive Layout
-- [ ] Theme Configuration
+- [x] Theme Configuration
 
 ## Home Page
 
