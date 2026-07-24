@@ -1,3 +1,4 @@
+import About from '@/components/home/About'
 import Categories from '@/components/home/Categories'
 import FeaturedProducts from '@/components/home/FeaturedProducts'
 import Hero from '@/components/home/Hero'
@@ -10,6 +11,7 @@ function HomePage() {
       <FeaturedProducts />
       <Categories />
       <ProductGrid />
+      <About />
     </div>
   )
 }
