@@ -1,5 +1,5 @@
-import FeaturedProducts from '@/components/home/FeaturedProducts'
 import Categories from '@/components/home/Categories'
+import FeaturedProducts from '@/components/home/FeaturedProducts'
 import Hero from '@/components/home/Hero'
 
 function HomePage() {
@@ -7,11 +7,6 @@ function HomePage() {
     <div className="space-y-4">
       <Hero />
       <FeaturedProducts />
-    </div>
-  )
-  return (
-    <div className="space-y-4">
-      <Hero />
       <Categories />
     </div>
   )
