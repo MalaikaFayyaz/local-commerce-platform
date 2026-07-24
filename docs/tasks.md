@@ -87,7 +87,7 @@ Do not combine unrelated work into a single task.
 - [x] Categories Section
 - [x] Product Grid
 - [x] About Section
-- [ ] Contact Section
+- [x] Contact Section
 
 ---
 
