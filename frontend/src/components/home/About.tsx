@@ -1,19 +1,27 @@
 function About() {
   return (
-    <section aria-labelledby="about-heading" className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+    <section
+      aria-labelledby="about-heading"
+      className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16"
+    >
       <div className="grid items-center gap-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8 lg:grid-cols-[1.1fr_0.9fr] lg:p-10">
         <div className="max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
             About Grandir
           </p>
-          <h2 id="about-heading" className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+          <h2
+            id="about-heading"
+            className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl"
+          >
             Crafted for modern local businesses and their communities.
           </h2>
           <p className="mt-4 text-base leading-7 text-slate-600">
-            Grandir brings together beautiful storefront experiences and simple ordering so local businesses can serve customers with warmth, clarity, and confidence.
+            Grandir brings together beautiful storefront experiences and simple ordering so local
+            businesses can serve customers with warmth, clarity, and confidence.
           </p>
           <p className="mt-4 text-base leading-7 text-slate-600">
-            From morning pastries to thoughtful everyday essentials, the experience is designed to feel welcoming, premium, and easy to navigate.
+            From morning pastries to thoughtful everyday essentials, the experience is designed to
+            feel welcoming, premium, and easy to navigate.
           </p>
           <a
             href="#"
