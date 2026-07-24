@@ -1,5 +1,7 @@
+import Hero from '@/components/home/Hero'
+
 function HomePage() {
-  return <h1 className="text-2xl font-semibold text-slate-900">Home Page</h1>
+  return <Hero />
 }
 
 export default HomePage
