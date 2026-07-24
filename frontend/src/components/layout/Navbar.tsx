@@ -83,7 +83,7 @@ function Navbar() {
 
 
   const getLinkClasses = (isActive: boolean) =>
-  `border-b pb-1 text-sm font-medium transition-colors duration-150 ${
+  `border-b-2 pb-1 text-sm font-medium transition-colors duration-150 ${
     isActive
       ? 'border-amber-600 font-semibold text-slate-1000'
       : 'border-transparent text-slate-600 hover:text-slate-900'
@@ -100,9 +100,9 @@ function Navbar() {
       ? 'Menu'
       : null
 
-  return (
+  return (  
     <header
-      className={`fixed inset-x-0 top-0 z-20 border-b border-slate-200 bg-white/95 backdrop-blur-sm transition-transform duration-300 ease-out ${
+      className={`fixed inset-x-0 top-0 z-20 border-b border-slate-200 bg-white/80 backdrop-blur-sm transition-transform duration-300 ease-out ${
         isVisible ? 'translate-y-0' : '-translate-y-full'
       }`}
     >
