@@ -82,8 +82,10 @@ function Navbar() {
   }
 
   const getLinkClasses = (isActive: boolean) =>
-    `border-b-2 border-transparent pb-1 text-sm font-medium transition-colors duration-150 ${
-      isActive ? 'border-amber-600 text-slate-900' : 'text-slate-600 hover:text-slate-900'
+    `border-b border-transparent pb-1 text-sm font-medium transition-colors duration-150 ${
+      isActive
+        ? 'border-amber-600 font-semibold text-slate-900'
+        : 'text-slate-600 hover:text-slate-900'
     }`
 
   const isHomeRoute = location.pathname === '/'
@@ -99,7 +101,7 @@ function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-20 border-b border-slate-200 bg-white/95 backdrop-blur-sm transition-transform duration-300 ease-out ${
+      className={`fixed inset-x-0 top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur-md shadow-[0_1px_0_rgba(15,23,42,0.04)] transition-transform duration-300 ease-out ${
         isVisible ? 'translate-y-0' : '-translate-y-full'
       }`}
     >
