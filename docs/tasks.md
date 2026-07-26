@@ -93,6 +93,8 @@ Do not combine unrelated work into a single task.
 
 # Milestone 4 — Product Catalog
 
+- [ ] Configure Supabase in the Frontend
+
 ## Categories
 
 - [ ] Display categories
