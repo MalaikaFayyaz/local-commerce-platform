@@ -1,51 +1,9 @@
 import CategoryCard from '@/components/category/CategoryCard'
-
-const categories = [
-  {
-    id: 1,
-    name: 'Fresh Breads',
-    imageUrl:
-      'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80',
-    productCount: '12 Items',
-  },
-  {
-    id: 2,
-    name: 'Pastries',
-    imageUrl:
-      'https://images.unsplash.com/photo-1483695028939-5bb13f8648b0?auto=format&fit=crop&w=900&q=80',
-    productCount: '8 Items',
-  },
-  {
-    id: 3,
-    name: 'Morning Favorites',
-    imageUrl:
-      'https://images.unsplash.com/photo-1517433670267-08bbd4be890f?auto=format&fit=crop&w=900&q=80',
-    productCount: '10 Items',
-  },
-  {
-    id: 4,
-    name: 'Cakes & Tarts',
-    imageUrl:
-      'https://images.unsplash.com/photo-1535141192574-5d4897c12636?auto=format&fit=crop&w=900&q=80',
-    productCount: '7 Items',
-  },
-  {
-    id: 5,
-    name: 'Coffee Pairings',
-    imageUrl:
-      'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80',
-    productCount: '9 Items',
-  },
-  {
-    id: 6,
-    name: 'Seasonal Picks',
-    imageUrl:
-      'https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=900&q=80',
-    productCount: '6 Items',
-  },
-]
+import { useCategories } from '@/hooks/useCategories'
 
 function Categories() {
+  const { categories, error, isLoading } = useCategories()
+
   return (
     <section
       aria-labelledby="categories-heading"
@@ -66,16 +24,39 @@ function Categories() {
         </p>
       </div>
 
-      <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        {categories.map((category) => (
-          <CategoryCard
-            key={category.id}
-            name={category.name}
-            imageUrl={category.imageUrl}
-            productCount={category.productCount}
-          />
-        ))}
-      </div>
+      {isLoading ? (
+        <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3" aria-live="polite">
+          {[0, 1, 2].map((index) => (
+            <div
+              key={index}
+              className="h-64 rounded-2xl border border-slate-200 bg-white shadow-sm"
+            />
+          ))}
+        </div>
+      ) : null}
+
+      {error ? (
+        <p className="mt-8 text-base text-slate-600" role="alert">
+          Categories are unavailable right now. Please try again later.
+        </p>
+      ) : null}
+
+      {!isLoading && !error && categories.length === 0 ? (
+        <p className="mt-8 text-base text-slate-600">No categories available.</p>
+      ) : null}
+
+      {!isLoading && !error && categories.length > 0 ? (
+        <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {categories.map((category) => (
+            <CategoryCard
+              key={category.id}
+              name={category.name}
+              imageUrl={category.image_url}
+              productCount={category.productCount}
+            />
+          ))}
+        </div>
+      ) : null}
     </section>
   )
 }
