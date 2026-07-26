@@ -1,13 +1,32 @@
-import { NavLink } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const quickLinks = [
   { label: 'Home', to: '/' },
   { label: 'Menu', to: '/menu' },
-  { label: 'About', to: '/about' },
-  { label: 'Contact', to: '/contact' },
+  { label: 'About', to: '/#about' },
+  { label: 'Contact', to: '/#contact' },
 ]
 
 function Footer() {
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  const handleLinkClick = (targetPath: string) => {
+    if (targetPath === '/' || targetPath === '/menu') {
+      navigate(targetPath)
+      return
+    }
+
+    const hash = targetPath.includes('#') ? targetPath.split('#')[1] : ''
+
+    if (location.pathname === '/') {
+      navigate(targetPath)
+      return
+    }
+
+    navigate(`/${hash ? `#${hash}` : ''}`.replace(/#$/, ''))
+  }
+
   return (
     <footer className="border-t border-slate-200 bg-white">
       <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
@@ -30,13 +49,17 @@ function Footer() {
             </h3>
             <nav aria-label="Footer navigation" className="mt-4 flex flex-col gap-2">
               {quickLinks.map((link) => (
-                <NavLink
+                <Link
                   key={link.label}
                   to={link.to}
+                  onClick={(event) => {
+                    event.preventDefault()
+                    handleLinkClick(link.to)
+                  }}
                   className="text-sm text-slate-600 transition hover:text-slate-900"
                 >
                   {link.label}
-                </NavLink>
+                </Link>
               ))}
             </nav>
           </section>
