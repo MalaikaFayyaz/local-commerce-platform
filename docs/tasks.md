@@ -93,7 +93,13 @@ Do not combine unrelated work into a single task.
 
 # Milestone 4 — Product Catalog
 
-- [ ] Configure Supabase in the Frontend
+## Configure Supabase in the Frontend
+
+- [x] Supabase client
+- [x] Environment variables
+- [x] Project linked
+- [x] Generated database types
+- [x] Shared type exports
 
 ## Categories
 
