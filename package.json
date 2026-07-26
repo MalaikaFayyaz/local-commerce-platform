@@ -6,6 +6,7 @@
     "dev": "npm --prefix frontend run dev"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.110.8",
     "lucide-react": "^1.25.0"
   }
 }
