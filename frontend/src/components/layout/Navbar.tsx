@@ -36,9 +36,38 @@ function Navbar() {
 
     window.addEventListener('scroll', handleScrollWithFrame, { passive: true })
 
+    return () => {
+      window.removeEventListener('scroll', handleScrollWithFrame)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (location.pathname !== '/') {
+      setActiveSection('menu')
+      return
+    }
+
+    const hash = location.hash.replace('#', '')
+    if (hash === 'about' || hash === 'contact') {
+      setActiveSection(hash)
+      return
+    }
+
+    setActiveSection('home')
+  }, [location.hash, location.pathname])
+
+  useEffect(() => {
+    if (location.pathname !== '/') {
+      return
+    }
+
     const sections = ['home', 'about', 'contact']
       .map((id) => document.getElementById(id))
       .filter(Boolean) as HTMLElement[]
+
+    if (sections.length === 0) {
+      return
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -59,10 +88,9 @@ function Navbar() {
     sections.forEach((section) => observer.observe(section))
 
     return () => {
-      window.removeEventListener('scroll', handleScrollWithFrame)
       observer.disconnect()
     }
-  }, [])
+  }, [location.hash, location.pathname])
 
   const handleSectionNav = (targetPath: string) => {
     if (location.pathname === '/' && targetPath === '/') {
@@ -81,13 +109,18 @@ function Navbar() {
     navigate(`/${hash ? `#${hash}` : ''}`.replace(/#$/, ''))
   }
 
+  useEffect(() => {
+    if (location.pathname !== '/') {
+      setActiveSection('menu')
+    }
+  }, [location.pathname])
 
   const getLinkClasses = (isActive: boolean) =>
-  `border-b-2 pb-1 text-sm font-medium transition-colors duration-150 ${
-    isActive
-      ? 'border-amber-600 font-semibold text-slate-1000'
-      : 'border-transparent text-slate-600 hover:text-slate-900'
-  }`
+    `border-b-2 pb-1 text-sm font-medium transition-colors duration-150 ${
+      isActive
+        ? 'border-amber-600 font-semibold text-slate-1000'
+        : 'border-transparent text-slate-600 hover:text-slate-900'
+    }`
 
   const isHomeRoute = location.pathname === '/'
   const activeLabel = isHomeRoute
@@ -100,7 +133,7 @@ function Navbar() {
       ? 'Menu'
       : null
 
-  return (  
+  return (
     <header
       className={`fixed inset-x-0 top-0 z-20 border-b border-slate-200 bg-white/80 backdrop-blur-sm transition-transform duration-300 ease-out ${
         isVisible ? 'translate-y-0' : '-translate-y-full'
