@@ -103,7 +103,7 @@ Do not combine unrelated work into a single task.
 
 ## Categories
 
-- [ ] Display categories
+- [x] Display categories
 - [ ] Filter products by category
 
 ## Products
