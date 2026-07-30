@@ -50,6 +50,7 @@ function Categories() {
           {categories.map((category) => (
             <CategoryCard
               key={category.id}
+              categoryId={category.id}
               name={category.name}
               imageUrl={category.image_url}
               productCount={category.productCount}
