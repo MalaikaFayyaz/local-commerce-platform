@@ -109,7 +109,7 @@ Do not combine unrelated work into a single task.
 
 ## Products
 
-- [ ] Display product cards
+- [x] Display product cards
 - [ ] Product details modal
 - [ ] Featured products
 
