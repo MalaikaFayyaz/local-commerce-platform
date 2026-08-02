@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import ProductGrid from '@/components/menu/ProductGrid'
 import { useProducts } from '@/hooks/useProducts'
@@ -6,6 +7,15 @@ function MenuPage() {
   const [searchParams] = useSearchParams()
   const selectedCategoryId = searchParams.get('category')
   const { error, isLoading, products } = useProducts(selectedCategoryId)
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const frame = window.requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' })
+    })
+
+    return () => window.cancelAnimationFrame(frame)
+  }, [])
 
   return (
     <div className="pt-20 sm:pt-8">
