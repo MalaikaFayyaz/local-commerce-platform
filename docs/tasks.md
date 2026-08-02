@@ -105,7 +105,7 @@ Do not combine unrelated work into a single task.
 
 - [x] Display categories
 - [x] Category Navigation
-- [ ] Product Filtering
+- [x] Product Filtering
 
 ## Products
 
