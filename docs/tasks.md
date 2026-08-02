@@ -110,7 +110,8 @@ Do not combine unrelated work into a single task.
 ## Products
 
 - [x] Display product cards
-- [ ] Product details modal
+- [x] Menu page polishing
+- [ ] Category filter bar
 - [ ] Featured products
 
 ## Search
