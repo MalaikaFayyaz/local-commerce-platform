@@ -6,13 +6,18 @@ export type DisplayProduct = Pick<Product, 'description' | 'id' | 'name' | 'pric
   imageUrl: string | null
 }
 
-export async function getProductsByCategory(categoryId: string): Promise<DisplayProduct[]> {
-  const { data, error } = await supabase
+export async function getProducts(categoryId: string | null): Promise<DisplayProduct[]> {
+  let query = supabase
     .from('products')
     .select('id, name, description, price_in_paisa, image_url')
-    .eq('category_id', categoryId)
     .eq('available', true)
     .is('archived_at', null)
+
+  if (categoryId) {
+    query = query.eq('category_id', categoryId)
+  }
+
+  const { data, error } = await query
 
   if (error) {
     throw error

@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import ProductGrid from '@/components/menu/ProductGrid'
 import { useProducts } from '@/hooks/useProducts'
@@ -7,13 +8,18 @@ function MenuPage() {
   const selectedCategoryId = searchParams.get('category')
   const { error, isLoading, products } = useProducts(selectedCategoryId)
 
-  return (
-    <div>
-      <h1 className="text-2xl font-semibold text-slate-900">Menu Page</h1>
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const frame = window.requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' })
+    })
 
-      {!selectedCategoryId ? (
-        <p className="mt-4 text-base text-slate-600">Select a category to view products.</p>
-      ) : null}
+    return () => window.cancelAnimationFrame(frame)
+  }, [])
+
+  return (
+    <div className="pt-20 sm:pt-8">
+      <h1 className="text-2xl font-semibold text-slate-900">Menu Page</h1>
 
       {isLoading ? <p className="mt-4 text-base text-slate-600">Loading products...</p> : null}
 
@@ -23,8 +29,12 @@ function MenuPage() {
         </p>
       ) : null}
 
-      {!isLoading && !error && selectedCategoryId && products.length === 0 ? (
-        <p className="mt-4 text-base text-slate-600">No products available in this category.</p>
+      {!isLoading && !error && products.length === 0 ? (
+        <p className="mt-4 text-base text-slate-600">
+          {selectedCategoryId
+            ? 'No products available in this category.'
+            : 'No products available.'}
+        </p>
       ) : null}
 
       {!isLoading && !error && products.length > 0 ? (

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getProductsByCategory } from '@/services/products'
+import { getProducts } from '@/services/products'
 import type { DisplayProduct } from '@/services/products'
 
 type UseProductsResult = {
@@ -11,29 +11,17 @@ type UseProductsResult = {
 export function useProducts(categoryId: string | null): UseProductsResult {
   const [products, setProducts] = useState<DisplayProduct[]>([])
   const [error, setError] = useState(false)
-  const [isLoading, setIsLoading] = useState(Boolean(categoryId))
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     let isMounted = true
-
-    if (!categoryId) {
-      setProducts([])
-      setError(false)
-      setIsLoading(false)
-
-      return () => {
-        isMounted = false
-      }
-    }
-
-    const selectedCategoryId = categoryId
 
     async function loadProducts() {
       setIsLoading(true)
       setError(false)
 
       try {
-        const fetchedProducts = await getProductsByCategory(selectedCategoryId)
+        const fetchedProducts = await getProducts(categoryId)
 
         if (isMounted) {
           setProducts(fetchedProducts)

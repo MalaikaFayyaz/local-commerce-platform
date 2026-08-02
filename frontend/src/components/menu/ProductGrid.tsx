@@ -13,10 +13,7 @@ function ProductGrid({ products }: ProductGridProps) {
           key={product.id}
           name={product.name}
           description={product.description ?? ''}
-          price={new Intl.NumberFormat('en-PK', {
-            currency: 'PKR',
-            style: 'currency',
-          }).format(product.price_in_paisa / 100)}
+          priceInPaisa={product.price_in_paisa}
           imageUrl={product.imageUrl}
         />
       ))}

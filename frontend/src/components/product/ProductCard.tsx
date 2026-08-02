@@ -1,11 +1,30 @@
 type ProductCardProps = {
   name: string
   description: string
-  price: string
   imageUrl: string | null
-}
+} & (
+  | {
+      price: string
+      priceInPaisa?: never
+    }
+  | {
+      price?: never
+      priceInPaisa: number
+    }
+)
 
-function ProductCard({ name, description, price, imageUrl }: ProductCardProps) {
+const priceFormatter = new Intl.NumberFormat('en-PK', {
+  currency: 'PKR',
+  style: 'currency',
+})
+
+function ProductCard(props: ProductCardProps) {
+  const { name, description, imageUrl } = props
+  const price =
+    typeof props.priceInPaisa === 'number'
+      ? priceFormatter.format(props.priceInPaisa / 100)
+      : props.price
+
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
       {imageUrl ? (

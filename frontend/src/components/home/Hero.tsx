@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 function Hero() {
   return (
     <section className="mx-auto flex w-full max-w-5xl flex-col items-center px-2 py-10 text-center sm:px-4 sm:py-14 lg:px-6 lg:py-20">
@@ -17,12 +19,12 @@ function Hero() {
           >
             Order Now
           </a>
-          <a
-            href="#"
+          <Link
+            to="/menu"
             className="inline-flex items-center justify-center rounded-lg border border-slate-200 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50"
           >
             Explore Menu
-          </a>
+          </Link>
         </div>
       </div>
     </section>
