@@ -8,7 +8,10 @@ type UseProductsResult = {
   products: DisplayProduct[]
 }
 
-export function useProducts(categoryId: string | null): UseProductsResult {
+export function useProducts(
+  categoryId: string | null,
+  searchQuery: string | null
+): UseProductsResult {
   const [products, setProducts] = useState<DisplayProduct[]>([])
   const [error, setError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
@@ -21,7 +24,7 @@ export function useProducts(categoryId: string | null): UseProductsResult {
       setError(false)
 
       try {
-        const fetchedProducts = await getProducts(categoryId)
+        const fetchedProducts = await getProducts(categoryId, searchQuery)
 
         if (isMounted) {
           setProducts(fetchedProducts)
@@ -42,7 +45,7 @@ export function useProducts(categoryId: string | null): UseProductsResult {
     return () => {
       isMounted = false
     }
-  }, [categoryId])
+  }, [categoryId, searchQuery])
 
   return { error, isLoading, products }
 }

@@ -22,7 +22,10 @@ function mapProduct(product: {
   }
 }
 
-export async function getProducts(categoryId: string | null): Promise<DisplayProduct[]> {
+export async function getProducts(
+  categoryId: string | null,
+  searchQuery?: string | null
+): Promise<DisplayProduct[]> {
   let query = supabase
     .from('products')
     .select('id, name, description, price_in_paisa, image_url')
@@ -39,7 +42,19 @@ export async function getProducts(categoryId: string | null): Promise<DisplayPro
     throw error
   }
 
-  return (data ?? []).map(mapProduct)
+  const normalizedQuery = searchQuery?.trim().toLowerCase() ?? ''
+
+  return (data ?? [])
+    .filter((product) => {
+      if (!normalizedQuery) {
+        return true
+      }
+
+      const haystack = `${product.name} ${product.description ?? ''}`.toLowerCase()
+
+      return haystack.includes(normalizedQuery)
+    })
+    .map(mapProduct)
 }
 
 export async function getFeaturedProducts(limit = 4): Promise<DisplayProduct[]> {
