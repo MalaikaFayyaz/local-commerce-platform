@@ -16,7 +16,7 @@ function FeaturedProducts() {
       setError(false)
 
       try {
-        const products = await getFeaturedProducts(4)
+        const products = await getFeaturedProducts(8)
 
         if (isMounted) {
           setFeaturedProducts(products)
@@ -82,17 +82,35 @@ function FeaturedProducts() {
       ) : null}
 
       {!isLoading && !error && featuredProducts.length > 0 ? (
-        <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          {featuredProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              name={product.name}
-              description={product.description ?? 'No description available'}
-              priceInPaisa={product.price_in_paisa}
-              imageUrl={product.imageUrl}
-            />
-          ))}
-        </div>
+        featuredProducts.length > 4 ? (
+          <div className="mt-8 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-4">
+            {featuredProducts.map((product) => (
+              <div
+                key={product.id}
+                className="min-w-[85vw] shrink-0 snap-start sm:min-w-[18rem] lg:min-w-[20rem]"
+              >
+                <ProductCard
+                  name={product.name}
+                  description={product.description ?? 'No description available'}
+                  priceInPaisa={product.price_in_paisa}
+                  imageUrl={product.imageUrl}
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {featuredProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                name={product.name}
+                description={product.description ?? 'No description available'}
+                priceInPaisa={product.price_in_paisa}
+                imageUrl={product.imageUrl}
+              />
+            ))}
+          </div>
+        )
       ) : null}
     </section>
   )
