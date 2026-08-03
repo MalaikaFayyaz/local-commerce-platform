@@ -116,8 +116,8 @@ Do not combine unrelated work into a single task.
 
 ## Search
 
-- [ ] Product search
-- [ ] Empty search state
+- [x] Product search
+- [x] Empty search state
 
 ---
 
