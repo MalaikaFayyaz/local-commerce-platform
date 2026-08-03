@@ -112,7 +112,7 @@ Do not combine unrelated work into a single task.
 - [x] Display product cards
 - [x] Menu page polishing
 - [x] Category filter bar
-- [ ] Featured products
+- [x] Featured products
 
 ## Search
 

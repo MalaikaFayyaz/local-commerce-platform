@@ -6,6 +6,22 @@ export type DisplayProduct = Pick<Product, 'description' | 'id' | 'name' | 'pric
   imageUrl: string | null
 }
 
+function mapProduct(product: {
+  description: string | null
+  id: string
+  image_url: string | null
+  name: string
+  price_in_paisa: number
+}): DisplayProduct {
+  return {
+    id: product.id,
+    name: product.name,
+    description: product.description ?? 'No description available',
+    price_in_paisa: product.price_in_paisa,
+    imageUrl: product.image_url ? getPublicAssetUrl(product.image_url) : null,
+  }
+}
+
 export async function getProducts(categoryId: string | null): Promise<DisplayProduct[]> {
   let query = supabase
     .from('products')
@@ -23,11 +39,22 @@ export async function getProducts(categoryId: string | null): Promise<DisplayPro
     throw error
   }
 
-  return (data ?? []).map((product) => ({
-    id: product.id,
-    name: product.name,
-    description: product.description,
-    price_in_paisa: product.price_in_paisa,
-    imageUrl: product.image_url ? getPublicAssetUrl(product.image_url) : null,
-  }))
+  return (data ?? []).map(mapProduct)
+}
+
+export async function getFeaturedProducts(limit = 4): Promise<DisplayProduct[]> {
+  const { data, error } = await supabase
+    .from('products')
+    .select('id, name, description, price_in_paisa, image_url')
+    .eq('available', true)
+    .is('archived_at', null)
+    .eq('featured', true)
+    .order('created_at', { ascending: false })
+    .limit(limit)
+
+  if (error) {
+    throw error
+  }
+
+  return (data ?? []).map(mapProduct)
 }
