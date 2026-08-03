@@ -5,7 +5,6 @@ import Categories from '@/components/home/Categories'
 import Contact from '@/components/home/Contact'
 import FeaturedProducts from '@/components/home/FeaturedProducts'
 import Hero from '@/components/home/Hero'
-import ProductGrid from '@/components/home/ProductGrid'
 
 function HomePage() {
   const location = useLocation()
@@ -48,7 +47,6 @@ function HomePage() {
       </div>
       <FeaturedProducts />
       <Categories />
-      <ProductGrid />
       <div id="about" className="scroll-mt-24">
         <About />
       </div>
