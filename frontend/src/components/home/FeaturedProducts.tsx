@@ -1,45 +1,44 @@
+import { useEffect, useState } from 'react'
 import ProductCard from '@/components/product/ProductCard'
-
-const featuredProducts = [
-  {
-    id: 1,
-    name: 'Honey Brioche',
-    description: 'Buttery brioche layered with a soft honey glaze.',
-    price: '$8.50',
-    imageUrl:
-      'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80',
-    featured: true,
-  },
-  {
-    id: 2,
-    name: 'Rose Tart',
-    description: 'A delicate tart with floral notes and vanilla cream.',
-    price: '$10.00',
-    imageUrl:
-      'https://images.unsplash.com/photo-1483695028939-5bb13f8648b0?auto=format&fit=crop&w=900&q=80',
-    featured: true,
-  },
-  {
-    id: 3,
-    name: 'Morning Loaf',
-    description: 'Soft sourdough crafted for slow mornings and fresh slices.',
-    price: '$7.25',
-    imageUrl:
-      'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80',
-    featured: true,
-  },
-  {
-    id: 4,
-    name: 'Cinnamon Twist',
-    description: 'Warm spiced pastry finished with a light sugar crust.',
-    price: '$6.75',
-    imageUrl:
-      'https://images.unsplash.com/photo-1517433670267-08bbd4be890f?auto=format&fit=crop&w=900&q=80',
-    featured: true,
-  },
-]
+import { getFeaturedProducts } from '@/services/products'
+import type { DisplayProduct } from '@/services/products'
 
 function FeaturedProducts() {
+  const [featuredProducts, setFeaturedProducts] = useState<DisplayProduct[]>([])
+  const [error, setError] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    let isMounted = true
+
+    async function loadFeaturedProducts() {
+      setIsLoading(true)
+      setError(false)
+
+      try {
+        const products = await getFeaturedProducts(4)
+
+        if (isMounted) {
+          setFeaturedProducts(products)
+        }
+      } catch {
+        if (isMounted) {
+          setError(true)
+        }
+      } finally {
+        if (isMounted) {
+          setIsLoading(false)
+        }
+      }
+    }
+
+    void loadFeaturedProducts()
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
   return (
     <section
       aria-labelledby="featured-products-heading"
@@ -61,17 +60,40 @@ function FeaturedProducts() {
         </p>
       </div>
 
-      <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-        {featuredProducts.map((product) => (
-          <ProductCard
-            key={product.id}
-            name={product.name}
-            description={product.description}
-            price={product.price}
-            imageUrl={product.imageUrl}
-          />
-        ))}
-      </div>
+      {isLoading ? (
+        <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4" aria-live="polite">
+          {[0, 1, 2, 3].map((index) => (
+            <div
+              key={index}
+              className="h-72 rounded-2xl border border-slate-200 bg-white shadow-sm"
+            />
+          ))}
+        </div>
+      ) : null}
+
+      {error ? (
+        <p className="mt-8 text-base text-slate-600" role="alert">
+          Featured products are unavailable right now. Please try again later.
+        </p>
+      ) : null}
+
+      {!isLoading && !error && featuredProducts.length === 0 ? (
+        <p className="mt-8 text-base text-slate-600">No featured products available right now.</p>
+      ) : null}
+
+      {!isLoading && !error && featuredProducts.length > 0 ? (
+        <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          {featuredProducts.map((product) => (
+            <ProductCard
+              key={product.id}
+              name={product.name}
+              description={product.description ?? 'No description available'}
+              priceInPaisa={product.price_in_paisa}
+              imageUrl={product.imageUrl}
+            />
+          ))}
+        </div>
+      ) : null}
     </section>
   )
 }
